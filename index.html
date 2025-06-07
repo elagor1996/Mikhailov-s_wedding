@@ -314,64 +314,6 @@
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById("countdown").innerHTML = `${days} дн. ${hours} ч. ${minutes} мин. ${seconds} сек.`;
-        }, 1000);
-
-        const wishes = [
-            "Будем очень признательны, если Вы воздержитесь от криков «Горько». Ведь поцелуй – это знак выражения чувств, и он не может быть по заказу.",
-            "Пожалуйста, не дарите нам цветы! Мы не успеем насладиться их красотой и ароматом. Если хотите подарить нам ценный и нужный подарок, мы будем очень благодарны за вклад в бюджет нашей молодой семьи.",
-            "Приходите на свадьбу с хорошим настроением "
-        ];
-        let currentWish = 0;
-        const wishText = document.getElementById("wishText");
-        function showWish(index) {
-            wishText.style.opacity = 0;
-            setTimeout(() => {
-                wishText.textContent = wishes[index];
-                wishText.style.opacity = 1;
-            }, 300);
-        }
-        function prevWish() {
-            currentWish = (currentWish - 1 + wishes.length) % wishes.length;
-            showWish(currentWish);
-        }
-        function nextWish() {
-            currentWish = (currentWish + 1) % wishes.length;
-            showWish(currentWish);
-        }
-        setInterval(() => {
-            nextWish();
-        }, 6000);
-        showWish(currentWish);
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                } else {
-                    entry.target.classList.remove('visible');
-                }
-            });
-        }, { threshold: 0.3 });
-
-        document.querySelectorAll('.section.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
-    <script>
-        const weddingDate = new Date("2025-08-13T17:30:00").getTime();
-        const timer = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-            if (distance < 0) {
-                clearInterval(timer);
-                document.getElementById("countdown").innerHTML = "Свадьба уже состоялась!";
-                return;
-            }
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
             document.getElementById("countdown").innerHTML =
                 `${days} дн. ${hours} ч. ${minutes} мин. ${seconds} сек.`;
         }, 1000);
