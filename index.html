@@ -140,39 +140,24 @@
             color: var(--text-muted);
         }
 
-        .wishes-carousel {
+        .wishes-list {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1em;
-            flex-wrap: wrap;
-            text-align: center;
-            position: relative;
+            flex-direction: column;
+            gap: 1.5em;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .wish {
-            flex: 1 1 100%;
-            max-width: 600px;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--accent);
+            padding: 1em;
+            border-radius: 8px;
+            color: var(--text-light);
             font-size: 1.1em;
-            color: #ddd;
             line-height: 1.6;
-            min-height: 100px;
-            transition: opacity 0.5s ease;
-            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
-
-        .arrow {
-            font-size: 2em;
-            cursor: pointer;
-            color: #aaa;
-            user-select: none;
-            transition: transform 0.2s ease;
-        }
-
-            .arrow:hover {
-                color: #fff;
-                transform: scale(1.2);
-            }
 
         .button {
             display: inline-block;
@@ -269,22 +254,36 @@
             .names-title {
                 font-size: 2em;
             }
-
-            .arrow {
-                font-size: 1.5em;
-            }
         }
     </style>
 </head>
 <body>
-    <section class="video-header"><video src="background.mp4" autoplay muted loop></video><div class="overlay"><h1 class="names-title">Александра & Александр</h1></div></section>
-    <section class="section fade-in"><div class="split-section"><img src="1.jpg" alt="Фото пары" style="filter: grayscale(100%);" /><div class="text"><h2>Этот момент настал</h2><p>Совсем скоро состоится день нашей свадьбы, и мы будем счастливы, если Вы разделите с нами этот чудесный день!</p></div></div></section>
-    <section class="section fade-in"><h2>Свадьба состоится</h2><img src="calendar.png" alt="Календарь" style="display:block;margin:0 auto;max-width:300px;" /><div class="timer" id="countdown">Загрузка...</div></section>
+    <section class="video-header">
+        <video src="background.mp4" autoplay muted loop></video>
+        <div class="overlay">
+            <h1 class="names-title">Александра & Александр</h1>
+        </div>
+    </section>
+
+    <section class="section fade-in">
+        <div class="split-section">
+            <img src="1.jpg" alt="Фото пары" style="filter: grayscale(100%);" />
+            <div class="text">
+                <h2>Этот момент настал</h2>
+                <p>Совсем скоро состоится день нашей свадьбы, и мы будем счастливы, если Вы разделите с нами этот чудесный день!</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section fade-in">
+        <h2>Свадьба состоится</h2>
+        <img src="calendar.png" alt="Календарь" style="display:block;margin:0 auto;max-width:300px;" />
+        <div class="timer" id="countdown">Загрузка...</div>
+    </section>
+
     <section class="section fade-in">
         <h2>Локация</h2>
-        <img src="location.jpg"
-             alt="Локация"
-             style="width: 100%; max-width: 600px; margin: 1em auto; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); display: block;" />
+        <img src="location.jpg" alt="Локация" style="width: 100%; max-width: 600px; margin: 1em auto; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); display: block;" />
         <p style="text-align:center;">
             Наша свадьба пройдет в ресторане «Сувары»<br />
             Город Чебоксары, Президентский бульвар, 4
@@ -297,9 +296,39 @@
         </div>
     </section>
 
-    <section class="section fade-in"><h2>Дресс-код</h2><p style="text-align:center;max-width:600px;margin:0 auto;">Поддержите нас красивыми нарядами в пастельных оттенках. Приветствуем классику и минимализм.</p><div class="color-dots" style="margin-top:1.5em;"><span class="dot c1"></span><span class="dot c2"></span><span class="dot c3"></span><span class="dot c4"></span><span class="dot c5"></span></div></section>
-    <section class="section fade-in"><h2>Пожелания</h2><div class="wishes-carousel"><div class="arrow" onclick="prevWish()">&#8592;</div><div class="wish" id="wishText"></div><div class="arrow" onclick="nextWish()">&#8594;</div></div></section>
-    <section class="section fade-in"><h2>Анкета гостя</h2><form action="https://formspree.io/f/mblyjevr" method="POST"><label for="fullname">Имя и Фамилия</label><input type="text" id="fullname" name="fullname" required><label>Планируете ли Вы присутствовать?</label><br><label><input type="radio" name="attendance" value="Да" required> Да, с удовольствием</label><br><label><input type="radio" name="attendance" value="Нет"> Не смогу</label><br><button type="submit">Отправить</button></form></section>
+    <section class="section fade-in">
+        <h2>Дресс-код</h2>
+        <p style="text-align:center;max-width:600px;margin:0 auto;">Поддержите нас красивыми нарядами в пастельных оттенках. Приветствуем классику и минимализм.</p>
+        <div class="color-dots" style="margin-top:1.5em;">
+            <span class="dot c1"></span>
+            <span class="dot c2"></span>
+            <span class="dot c3"></span>
+            <span class="dot c4"></span>
+            <span class="dot c5"></span>
+        </div>
+    </section>
+
+    <section class="section fade-in">
+        <h2>Пожелания</h2>
+        <div class="wishes-list">
+            <div class="wish">Будем очень признательны, если Вы воздержитесь от криков «Горько». Ведь поцелуй – это знак выражения чувств, и он не может быть по заказу.</div>
+            <div class="wish">Пожалуйста, не дарите нам цветы! Мы не успеем насладиться их красотой и ароматом. Если хотите подарить нам ценный и нужный подарок, мы будем очень благодарны за вклад в бюджет нашей молодой семьи.</div>
+            <div class="wish">Приходите на свадьбу с хорошим настроением 🤍</div>
+        </div>
+    </section>
+
+    <section class="section fade-in">
+        <h2>Анкета гостя</h2>
+        <form action="https://formspree.io/f/mblyjevr" method="POST">
+            <label for="fullname">Имя и Фамилия</label>
+            <input type="text" id="fullname" name="fullname" required>
+            <label>Планируете ли Вы присутствовать?</label><br>
+            <label><input type="radio" name="attendance" value="Да" required> Да, с удовольствием</label><br>
+            <label><input type="radio" name="attendance" value="Нет"> Не смогу</label><br>
+            <button type="submit">Отправить</button>
+        </form>
+    </section>
+
     <script>
         const weddingDate = new Date("2025-08-13T17:30:00").getTime();
         const timer = setInterval(() => {
@@ -318,48 +347,6 @@
                 `${days} дн. ${hours} ч. ${minutes} мин. ${seconds} сек.`;
         }, 1000);
 
-        // Пожелания
-        const wishes = [
-            "Будем очень признательны, если Вы воздержитесь от криков «Горько». Ведь поцелуй – это знак выражения чувств, и он не может быть по заказу.",
-            "Пожалуйста, не дарите нам цветы! Мы не успеем насладиться их красотой и ароматом. Если хотите подарить нам ценный и нужный подарок, мы будем очень благодарны за вклад в бюджет нашей молодой семьи.",
-            "Приходите на свадьбу с хорошим настроением 🤍"
-        ];
-
-        let currentWish = 0;
-        let autoSwitchTimer;
-        const wishText = document.getElementById("wishText");
-
-        function showWish(index) {
-            wishText.style.opacity = 0;
-            setTimeout(() => {
-                wishText.textContent = wishes[index];
-                wishText.style.opacity = 1;
-            }, 300);
-        }
-
-        function resetAutoSwitch() {
-            clearInterval(autoSwitchTimer);
-            autoSwitchTimer = setInterval(() => {
-                nextWish();
-            }, 10000); // 10 секунд
-        }
-
-        function prevWish() {
-            currentWish = (currentWish - 1 + wishes.length) % wishes.length;
-            showWish(currentWish);
-            resetAutoSwitch();
-        }
-
-        function nextWish() {
-            currentWish = (currentWish + 1) % wishes.length;
-            showWish(currentWish);
-            resetAutoSwitch();
-        }
-
-        // Запуск при загрузке
-        showWish(currentWish);
-        resetAutoSwitch();
-
         // Анимация появления секций
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -373,8 +360,5 @@
 
         document.querySelectorAll('.section.fade-in').forEach(el => observer.observe(el));
     </script>
-</body>
-</html>
-
 </body>
 </html>
