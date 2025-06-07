@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Свадебное приглашение</title>
+    <link href="https://fonts.googleapis.com/css2?family=Futura+PT:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+    <style>
+        @font-face {
+            font-family: 'Czizh';
+            src: url('ofont.ru_Czizh.ttf') format('truetype');
+        }
+
+        :root {
+            --accent: #f0e6db;
+            --bg-dark: #2a2a2a;
+            --bg-section: #3a3a3a;
+            --text-light: #f2f2f2;
+            --text-muted: #ccc;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Futura PT', sans-serif;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 0.2em;
+        }
+
+            h2::after {
+                content: "";
+                display: block;
+                width: 60px;
+                height: 2px;
+                background: var(--text-light);
+                margin: 0.4em auto 1em;
+            }
+
+        .names-title {
+            font-family: 'Czizh', cursive;
+            font-size: 3.5em;
+            color: white;
+            text-align: center;
+            margin: 0;
+        }
+
+        .section {
+            background: var(--bg-section);
+            border-radius: 16px;
+            padding: 3em 1.5em;
+            margin: 2em auto;
+            max-width: 900px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+            .section.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        .video-header {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+            .video-header video {
+                filter: grayscale(100%);
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: -1;
+            }
+
+            .video-header .overlay {
+                background: rgba(0, 0, 0, 0.5);
+                padding: 2em;
+                border-radius: 12px;
+            }
+
+        .split-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2em;
+        }
+
+            .split-section img {
+                flex: 1 1 300px;
+                border-radius: 0 0 100px 100px;
+                clip-path: ellipse(75% 100% at 50% 100%);
+                width: 100%;
+                max-width: 400px;
+                box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+            }
+
+            .split-section .text {
+                flex: 1 1 300px;
+                color: var(--text-muted);
+                font-size: 1.1em;
+                line-height: 1.5;
+            }
+
+        .calendar-date {
+            font-size: 2em;
+            font-weight: bold;
+            margin-top: 1em;
+            text-align: center;
+            border-top: 1px solid var(--text-muted);
+            border-bottom: 1px solid var(--text-muted);
+            padding: 0.5em;
+        }
+
+        .timer {
+            text-align: center;
+            font-size: 2em;
+            margin-top: 1.5em;
+            color: var(--text-muted);
+        }
+
+        .wishes-carousel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1em;
+            flex-wrap: wrap;
+            text-align: center;
+            position: relative;
+        }
+
+        .wish {
+            flex: 1 1 100%;
+            max-width: 600px;
+            font-size: 1.1em;
+            color: #ddd;
+            line-height: 1.6;
+            min-height: 100px;
+            transition: opacity 0.5s ease;
+            text-align: center;
+        }
+
+        .arrow {
+            font-size: 2em;
+            cursor: pointer;
+            color: #aaa;
+            user-select: none;
+            transition: transform 0.2s ease;
+        }
+
+            .arrow:hover {
+                color: #fff;
+                transform: scale(1.2);
+            }
+
+        .button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--bg-dark);
+            padding: 0.75em 1.5em;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+
+            .button:hover {
+                background-color: #d9cfc2;
+                color: #000;
+            }
+
+        .color-dots {
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+        }
+
+        .dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+
+        .c1 {
+            background: #f0dacb;
+        }
+
+        .c2 {
+            background: #cac4c4;
+        }
+
+        .c3 {
+            background: #e1c1c1;
+        }
+
+        .c4 {
+            background: #b3c6ba;
+        }
+
+        .c5 {
+            background: #d1cab3;
+        }
+
+        input, label, button {
+            font-size: 1em;
+        }
+
+            input[type="text"] {
+                width: 100%;
+                padding: 0.7em;
+                border-radius: 6px;
+                margin: 0.5em 0;
+                border: none;
+            }
+
+            button[type="submit"] {
+                background-color: #777;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                padding: 0.75em 1.5em;
+                cursor: pointer;
+                font-size: 1em;
+            }
+
+        @media (max-width: 600px) {
+            .section {
+                padding: 2em 1em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .calendar-date,
+            .timer {
+                font-size: 1.5em;
+            }
+
+            .split-section {
+                flex-direction: column;
+            }
+
+            .names-title {
+                font-size: 2em;
+            }
+
+            .arrow {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="video-header"><video src="background.mp4" autoplay muted loop></video><div class="overlay"><h1 class="names-title">Александра & Александр</h1></div></section>
+    <section class="section fade-in"><div class="split-section"><img src="1.jpg" alt="Фото пары" style="filter: grayscale(100%);" /><div class="text"><h2>Этот момент настал</h2><p>Совсем скоро состоится день нашей свадьбы, и мы будем счастливы, если Вы разделите с нами этот чудесный день!</p></div></div></section>
+    <section class="section fade-in"><h2>Свадьба состоится</h2><img src="calendar.png" alt="Календарь" style="display:block;margin:0 auto;max-width:300px;" /><div class="timer" id="countdown">Загрузка...</div></section>
+    <section class="section fade-in">
+        <h2>Локация</h2>
+        <img src="location.jpg"
+             alt="Локация"
+             style="width: 100%; max-width: 600px; margin: 1em auto; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); display: block;" />
+        <p style="text-align:center;">
+            Наша свадьба пройдет в ресторане «Сувары»<br />
+            Город Чебоксары, Президентский бульвар, 4
+        </p>
+        <div style="text-align:center; margin-top:1em; font-size:1.2em;">
+            Сбор гостей 17:30 → Банкет 18:00
+        </div>
+        <div style="text-align:center; margin-top:1em;">
+            <a href="https://yandex.ru/maps/-/CHG7NJ5s" class="button" target="_blank" rel="noopener noreferrer">Как добраться</a>
+        </div>
+    </section>
+
+    <section class="section fade-in"><h2>Дресс-код</h2><p style="text-align:center;max-width:600px;margin:0 auto;">Поддержите нас красивыми нарядами в пастельных оттенках. Приветствуем классику и минимализм.</p><div class="color-dots" style="margin-top:1.5em;"><span class="dot c1"></span><span class="dot c2"></span><span class="dot c3"></span><span class="dot c4"></span><span class="dot c5"></span></div></section>
+    <section class="section fade-in"><h2>Пожелания</h2><div class="wishes-carousel"><div class="arrow" onclick="prevWish()">&#8592;</div><div class="wish" id="wishText"></div><div class="arrow" onclick="nextWish()">&#8594;</div></div></section>
+    <section class="section fade-in"><h2>Анкета гостя</h2><form action="https://formspree.io/f/mblyjevr" method="POST"><label for="fullname">Имя и Фамилия</label><input type="text" id="fullname" name="fullname" required><label>Планируете ли Вы присутствовать?</label><br><label><input type="radio" name="attendance" value="Да" required> Да, с удовольствием</label><br><label><input type="radio" name="attendance" value="Нет"> Не смогу</label><br><button type="submit">Отправить</button></form></section>
+    <script>
+        const weddingDate = new Date("2025-08-13T17:30:00").getTime();
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "Свадьба уже состоялась!";
+                return;
+            }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("countdown").innerHTML = `${days} дн. ${hours} ч. ${minutes} мин. ${seconds} сек.`;
+        }, 1000);
+
+        const wishes = [
+            "Будем очень признательны, если Вы воздержитесь от криков «Горько». Ведь поцелуй – это знак выражения чувств, и он не может быть по заказу.",
+            "Пожалуйста, не дарите нам цветы! Мы не успеем насладиться их красотой и ароматом. Если хотите подарить нам ценный и нужный подарок, мы будем очень благодарны за вклад в бюджет нашей молодой семьи.",
+            "Приходите на свадьбу с хорошим настроением "
+        ];
+        let currentWish = 0;
+        const wishText = document.getElementById("wishText");
+        function showWish(index) {
+            wishText.style.opacity = 0;
+            setTimeout(() => {
+                wishText.textContent = wishes[index];
+                wishText.style.opacity = 1;
+            }, 300);
+        }
+        function prevWish() {
+            currentWish = (currentWish - 1 + wishes.length) % wishes.length;
+            showWish(currentWish);
+        }
+        function nextWish() {
+            currentWish = (currentWish + 1) % wishes.length;
+            showWish(currentWish);
+        }
+        setInterval(() => {
+            nextWish();
+        }, 6000);
+        showWish(currentWish);
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.section.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+    <script>
+        const weddingDate = new Date("2025-08-13T17:30:00").getTime();
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "Свадьба уже состоялась!";
+                return;
+            }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("countdown").innerHTML =
+                `${days} дн. ${hours} ч. ${minutes} мин. ${seconds} сек.`;
+        }, 1000);
+
+        // Пожелания
+        const wishes = [
+            "Будем очень признательны, если Вы воздержитесь от криков «Горько». Ведь поцелуй – это знак выражения чувств, и он не может быть по заказу.",
+            "Пожалуйста, не дарите нам цветы! Мы не успеем насладиться их красотой и ароматом. Если хотите подарить нам ценный и нужный подарок, мы будем очень благодарны за вклад в бюджет нашей молодой семьи.",
+            "Приходите на свадьбу с хорошим настроением 🤍"
+        ];
+
+        let currentWish = 0;
+        let autoSwitchTimer;
+        const wishText = document.getElementById("wishText");
+
+        function showWish(index) {
+            wishText.style.opacity = 0;
+            setTimeout(() => {
+                wishText.textContent = wishes[index];
+                wishText.style.opacity = 1;
+            }, 300);
+        }
+
+        function resetAutoSwitch() {
+            clearInterval(autoSwitchTimer);
+            autoSwitchTimer = setInterval(() => {
+                nextWish();
+            }, 10000); // 10 секунд
+        }
+
+        function prevWish() {
+            currentWish = (currentWish - 1 + wishes.length) % wishes.length;
+            showWish(currentWish);
+            resetAutoSwitch();
+        }
+
+        function nextWish() {
+            currentWish = (currentWish + 1) % wishes.length;
+            showWish(currentWish);
+            resetAutoSwitch();
+        }
+
+        // Запуск при загрузке
+        showWish(currentWish);
+        resetAutoSwitch();
+
+        // Анимация появления секций
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.section.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
+
+</body>
+</html>
